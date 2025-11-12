@@ -7,4 +7,3 @@ services:
     plan: free
     region: oregon
     rootDir: backend
-    pythonVersion: 3.11.9
