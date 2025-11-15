@@ -1,33 +1,20 @@
-# ------------------------------
-# Node (Frontend)
-# ------------------------------
-node_modules/
-dist/
-build/
-npm-debug.log*
-
-# ------------------------------
-# Python (Backend)
-# ------------------------------
-venv/
-__pycache__/
+# Python
+backend/venv/
+backend/app/__pycache__/
 *.pyc
-*.pyo
-*.pyd
 
-# ------------------------------
-# OS / Editor Files
-# ------------------------------
+# Node / React
+frontend/node_modules/
+frontend/dist/
+npm-debug.log
+yarn-error.log
+
+# System files
 .DS_Store
 Thumbs.db
 
-# ------------------------------
-# Env / Config Files
-# ------------------------------
-.env
-.env.local
+# VS Code
+.vscode/
 
-# ------------------------------
-# Others
-# ------------------------------
+# Temporary files
 *.log
