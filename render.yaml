@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: document-summary-backend
+    env: python
+    buildCommand: |
+      python -m venv venv
+      . venv/bin/activate
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: |
+      . venv/bin/activate
+      uvicorn app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+    plan: free
+    region: oregon
+    rootDir: backend

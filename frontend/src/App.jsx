@@ -2,16 +2,34 @@ import React, { useState, useRef } from "react";
 
 /**
  * App.jsx
- * - Connected to real FastAPI backend
+ * - Connected to Render FastAPI backend
  * - Uses Tailwind CSS for a clean, professional UI
  * - Created by SRINIVAS BAYYA
  */
 
 const IconUpload = ({ className = "w-6 h-6" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-    <path d="M12 3v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M8 7l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M21 15v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M12 3v10"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8 7l4-4 4 4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M21 15v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -35,7 +53,9 @@ function Navbar({ darkMode, setDarkMode }) {
         </h1>
       </div>
       <div className="flex items-center gap-3">
-        <div className="text-sm text-slate-500 hidden md:block">Smart Summarizer</div>
+        <div className="text-sm text-slate-500 hidden md:block">
+          Smart Summarizer
+        </div>
         <button
           onClick={() => setDarkMode(!darkMode)}
           className={`flex items-center gap-2 px-3 py-1 rounded-full border ${
@@ -107,7 +127,9 @@ function UploadCard({
         onDrop={onDrop}
         onClick={() => fileInputRef.current.click()}
         className={`border-2 ${
-          dragHover ? "border-blue-400 bg-blue-50/40" : "border-dashed border-slate-200"
+          dragHover
+            ? "border-blue-400 bg-blue-50/40"
+            : "border-dashed border-slate-200"
         } rounded-xl p-4 mb-4 cursor-pointer transition-colors`}
       >
         <div className="flex items-center gap-3">
@@ -216,7 +238,9 @@ function SummaryCard({ darkMode, summary, loading }) {
       <div
         className={`rounded-lg p-4 min-h-[240px] ${
           darkMode ? "bg-slate-900/40" : "bg-white"
-        } border ${darkMode ? "border-slate-700" : "border-slate-100"} overflow-auto`}
+        } border ${
+          darkMode ? "border-slate-700" : "border-slate-100"
+        } overflow-auto`}
       >
         {loading ? (
           <div className="animate-pulse space-y-3">
@@ -250,7 +274,7 @@ export default function App() {
   const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Real Backend Function
+  // ✅ Connected to Render FastAPI backend
   async function handleGenerateSummary() {
     if (!file) return;
 
@@ -262,7 +286,12 @@ export default function App() {
     formData.append("length", summaryType.toLowerCase());
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/upload", {
+      //const API_BASE_URL =
+       // "https://document-summary-assistant-uto5.onrender.com";
+       const API_BASE_URL = "http://127.0.0.1:8000";
+
+
+      const response = await fetch(`${API_BASE_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -306,16 +335,19 @@ export default function App() {
             setLanguage={setLanguage}
             summaryType={summaryType}
             setSummaryType={setSummaryType}
-            onGenerate={handleGenerateSummary} // ✅ Connected here
+            onGenerate={handleGenerateSummary} // ✅ Connected
             loading={loading}
           />
-          <SummaryCard darkMode={darkMode} summary={summary} loading={loading} />
+          <SummaryCard
+            darkMode={darkMode}
+            summary={summary}
+            loading={loading}
+          />
         </div>
         <footer className="max-w-screen-xl mx-auto mt-8 text-center text-xs text-slate-400">
-          Made with ❤️ by SRINIVASBAYYA
+          Made with ❤️ by SRINIVAS BAYYA
         </footer>
       </main>
     </div>
   );
 }
-
